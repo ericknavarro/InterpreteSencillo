@@ -86,6 +86,7 @@ instruccion ::=
    RIMPRIMIR PARIZQ expresion_cadena:a PARDER PTCOMA                          {:RESULT=new Imprimir(a);:}
  | RMIENTRAS PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER {:RESULT=new Mientras(a,b);:}
  | RNUMERO IDENTIFICADOR:a PTCOMA                                             {:RESULT=new Declaracion(a,Tipo.NUMERO);:}
+ | RNUMERO IDENTIFICADOR:a IGUAL expresion_numerica:b PTCOMA                  {:RESULT=new DeclararAsignar(a,Tipo.NUMERO,b);:}
  | IDENTIFICADOR:a IGUAL expresion_numerica:b PTCOMA                          {:RESULT=new Asignacion(a,b);:}
  | RIF PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER       {:RESULT=new If(a,b);:}
  | RIF PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER  RELSE LLAVIZQ instrucciones:c LLAVDER {:RESULT=new If(a,b,c);:}
