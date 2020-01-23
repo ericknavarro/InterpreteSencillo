@@ -27,7 +27,9 @@ public class Operacion implements Instruccion{
         CADENA,
         MAYOR_QUE,
         MENOR_QUE,
-        CONCATENACION
+        CONCATENACION,
+        AND,
+        OR
     }
     /**
      * Tipo de operación a ejecutar.
@@ -122,6 +124,10 @@ public class Operacion implements Instruccion{
             return ((Double)operadorIzq.ejecutar(ts)).doubleValue()<((Double)operadorDer.ejecutar(ts)).doubleValue();
         }else if(tipo== Tipo_operacion.CONCATENACION){
             return operadorIzq.ejecutar(ts).toString()+operadorDer.ejecutar(ts).toString();
+        }else if(tipo==Tipo_operacion.AND){
+            return ((Boolean)operadorIzq.ejecutar(ts))&&((Boolean)operadorDer.ejecutar(ts));
+        }else if(tipo == Tipo_operacion.OR){
+            return ((Boolean)operadorIzq.ejecutar(ts))||((Boolean)operadorDer.ejecutar(ts));
         }else{
             return null;
         }
