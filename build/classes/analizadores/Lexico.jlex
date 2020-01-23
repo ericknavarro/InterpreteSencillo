@@ -54,6 +54,8 @@ COMENTMULTILINEA ="/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
 ">" {return new Symbol(sym.MAYQUE,yyline,yychar, yytext());} 
 "=" {return new Symbol(sym.IGUAL,yyline,yychar, yytext());} 
 
+"&&" {return new Symbol(sym.AND,yyline,yychar,yytext());}
+"||" {return new Symbol(sym.OR,yyline,yychar,yytext());}
 \n {yychar=1;}
 
 {BLANCOS} {} 

@@ -53,13 +53,26 @@ c=13;
  **/
 If(a>10){
 	imprimir("a es mayor que 10.");
-	if(b>11){
-		imprimir("a es mayor que 10 y b es mayor que 11.");
-		if(c>12){
-			imprimir("a es mayor que 10, b es mayor que 11 y c es mayor que 12.");
-		}
+	if(b>11&&c>12){
+		imprimir("a es mayor que 10, b es mayor que 11 y c es mayor que 12.");
+	}
+	if(b<11||c>12){
+		imprimir("c es mayor a 12 o b es menor a 11");
+	}
+	if(b>11||c<12){
+		imprimir("c es menor a 12 o b es mayor a 11");
+	}
+	b=10;
+	c=13;
+	if(b>11&&c>12){
+		imprimir("a es mayor que 10, b es mayor que 11 y c es mayor que 12.");
+	}
+	if(b<11||c>12){
+		imprimir("c es mayor a 12 o b es menor a 11");
+	}
+	if(b>11||c<12){
+		imprimir("c es menor a 12 o b es mayor a 11");
 	}
 }else{
 	imprimir("a es menor o igual que 10.");
 }
-
