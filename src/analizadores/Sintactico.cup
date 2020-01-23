@@ -48,7 +48,7 @@ parser code
 
 terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER;
 terminal String MAS,MENOS,POR,DIVIDIDO,CONCAT;
-terminal String MENQUE,MAYQUE,AND,OR;
+terminal String MENQUE,MAYQUE;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -66,7 +66,6 @@ non terminal Operacion expresion_logica;
 precedence left CONCAT;
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
-precedence left AND,OR;
 precedence right UMENOS; 
 
 start with ini; 
@@ -114,7 +113,4 @@ expresion_cadena::=
 expresion_logica  ::= 
    expresion_numerica:a  MAYQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MAYOR_QUE);:} 
  | expresion_numerica:a  MENQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MENOR_QUE);:}  
- | expresion_logica:a  AND      expresion_logica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.AND);:}
- | expresion_logica:a  OR       expresion_logica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.OR);:}                       
-
 ;
