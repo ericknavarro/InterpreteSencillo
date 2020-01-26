@@ -53,7 +53,7 @@ terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
 terminal String UMENOS;
-terminal String RIMPRIMIR, RMIENTRAS,RNUMERO,RIF,RELSE;
+terminal String RIMPRIMIR, RMIENTRAS,RNUMERO,RIF,RELSE,RCADENA;
 terminal String IGUAL;
 terminal String IDENTIFICADOR;
 
@@ -86,7 +86,8 @@ instruccion ::=
    RIMPRIMIR PARIZQ expresion_cadena:a PARDER PTCOMA                          {:RESULT=new Imprimir(a);:}
  | RMIENTRAS PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER {:RESULT=new Mientras(a,b);:}
  | RNUMERO IDENTIFICADOR:a PTCOMA                                             {:RESULT=new Declaracion(a,Tipo.NUMERO);:}
- | IDENTIFICADOR:a IGUAL expresion_numerica:b PTCOMA                          {:RESULT=new Asignacion(a,b);:}
+ | RCADENA IDENTIFICADOR:a PTCOMA                                             {:RESULT=new Declaracion(a,Tipo.CADENA);:}
+ | IDENTIFICADOR:a IGUAL expresion_cadena:b PTCOMA                          {:RESULT=new Asignacion(a,b);:}
  | RIF PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER       {:RESULT=new If(a,b);:}
  | RIF PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER  RELSE LLAVIZQ instrucciones:c LLAVDER {:RESULT=new If(a,b,c);:}
  | error

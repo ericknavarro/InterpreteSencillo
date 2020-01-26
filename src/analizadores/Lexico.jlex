@@ -36,6 +36,7 @@ COMENTMULTILINEA ="/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
 
 "imprimir" {return new Symbol(sym.RIMPRIMIR,yyline,yychar, yytext());} 
 "numero" {return new Symbol(sym.RNUMERO,yyline,yychar, yytext());} 
+"cadena" {return new Symbol(sym.RCADENA,yyline,yychar, yytext());} 
 "mientras" {return new Symbol(sym.RMIENTRAS,yyline,yychar, yytext());} 
 "if" {return new Symbol(sym.RIF,yyline,yychar, yytext());} 
 "else" {return new Symbol(sym.RELSE,yyline,yychar, yytext());} 

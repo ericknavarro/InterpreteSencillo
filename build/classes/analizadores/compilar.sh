@@ -1,3 +1,2 @@
-jlex Lexico.jlex
-mv Lexico.jlex.java Lexico.java
+jflex Lexico.jlex
 cup -parser Sintactico Sintactico.cup

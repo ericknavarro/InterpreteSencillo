@@ -4,6 +4,11 @@
  * Septiembre - 2015                      *
  ******************************************/
 
+imprimir("PROBANDO CADENAS.......");
+cadena cad1;
+cad1 = "probando cadena ..................";
+imprimir(cad1);
+
 //Se imprime el encabezado
 imprimir("Tablas de" & " multiplicar");
 
