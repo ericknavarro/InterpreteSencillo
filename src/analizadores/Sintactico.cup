@@ -48,7 +48,7 @@ parser code
 
 terminal String PTCOMA,PARIZQ,PARDER,LLAVIZQ,LLAVDER;
 terminal String MAS,MENOS,POR,DIVIDIDO,CONCAT;
-terminal String MENQUE,MAYQUE;
+terminal String MENQUE,MAYQUE,IGUALQUE,NIGUALQUE;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -66,9 +66,9 @@ non terminal Operacion expresion_logica;
 precedence left CONCAT;
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
-precedence right UMENOS; 
+precedence right UMENOS;
 
-start with ini; 
+start with ini;
 
 ini::=instrucciones:a{:
     //se guarda el AST, que es la lista principal de instrucciones en la variable
@@ -77,12 +77,12 @@ ini::=instrucciones:a{:
 :}
 ;
 
-instrucciones ::= 
+instrucciones ::=
    instrucciones:a instruccion:b{:RESULT=a; RESULT.add(b);:}
  | instruccion:a{:RESULT=new LinkedList<>(); RESULT.add(a);:}
-; 
+;
 
-instruccion ::= 
+instruccion ::=
    RIMPRIMIR PARIZQ expresion_cadena:a PARDER PTCOMA                          {:RESULT=new Imprimir(a);:}
  | RMIENTRAS PARIZQ expresion_logica:a PARDER LLAVIZQ instrucciones:b LLAVDER {:RESULT=new Mientras(a,b);:}
  | RNUMERO IDENTIFICADOR:a PTCOMA                                             {:RESULT=new Declaracion(a,Tipo.NUMERO);:}
@@ -92,8 +92,8 @@ instruccion ::=
  | error
 ;
 
-expresion_numerica  ::= 
-    MENOS expresion_numerica:a                               {:RESULT=new Operacion(a,Operacion.Tipo_operacion.NEGATIVO);:}%prec UMENOS     
+expresion_numerica  ::=
+    MENOS expresion_numerica:a                               {:RESULT=new Operacion(a,Operacion.Tipo_operacion.NEGATIVO);:}%prec UMENOS
  |  expresion_numerica:a MAS        expresion_numerica:b     {:RESULT=new Operacion(a,b,Operacion.Tipo_operacion.SUMA);:}
  |  expresion_numerica:a MENOS      expresion_numerica:b     {:RESULT=new Operacion(a,b,Operacion.Tipo_operacion.RESTA);:}
  |  expresion_numerica:a POR        expresion_numerica:b     {:RESULT=new Operacion(a,b,Operacion.Tipo_operacion.MULTIPLICACION);:}
@@ -110,7 +110,9 @@ expresion_cadena::=
  |  expresion_numerica:a                         {:RESULT=a;:}
 ;
 
-expresion_logica  ::= 
-   expresion_numerica:a  MAYQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MAYOR_QUE);:} 
- | expresion_numerica:a  MENQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MENOR_QUE);:}  
+expresion_logica  ::=
+   expresion_numerica:a  MAYQUE    expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MAYOR_QUE);:}
+ | expresion_numerica:a  MENQUE    expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MENOR_QUE);:}
+ | expresion_numerica:a  IGUALQUE  expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.IGUAL_QUE);:}
+ | expresion_numerica:a  NIGUALQUE expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.NO_IGUAL_QUE);:}
 ;
