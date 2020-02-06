@@ -28,9 +28,16 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
      * @return Valor de la variable que se buscaba, si no existe se devuelve nulo
      */
     Object getValor(String id) {
-        Object returnValue = getValue(id);
-        if (returnValue == "Desconocido") System.out.println("La variable "+id+" no existe en este ámbito.");
-        return returnValue;
+        if (contains(id))
+        {
+            for(Simbolo s:this){
+                if(s.getId().equals(id)){
+                    return s.getValor();
+                }
+            }
+        }
+        System.out.println("La variable "+id+" no existe en este ámbito.");
+        return null;
     }
     /**
      * Método que asigna un valor a una variable específica, si no la encuentra
@@ -51,8 +58,7 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
 
     @Override
     public boolean add(Simbolo e) {
-        Object valor = getValue(e.getId());
-        if (valor == "Desconocido") {
+        if (!contains(e.getId())) {
             super.add(e);
             return true;
         }
@@ -60,13 +66,13 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
         return false;
     }
 
-    private Object getValue(String id)
+    public boolean contains(String id)
     {
         for(Simbolo s:this){
             if(s.getId().equals(id)){
-                return s.getValor();
+                return true;
             }
         }
-        return "Desconocido";
+        return false;
     }
 }
