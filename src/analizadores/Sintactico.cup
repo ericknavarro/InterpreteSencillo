@@ -114,5 +114,5 @@ expresion_logica  ::=
    expresion_numerica:a  MAYQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MAYOR_QUE);:}
  | expresion_numerica:a  MENQUE   expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.MENOR_QUE);:}
  | expresion_numerica:a  IGUALQUE  expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.IGUAL_QUE);:}
-  | expresion_numerica:a  NIGUALQUE expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.NO_IGUAL_QUE);:}
+ | expresion_numerica:a  NIGUALQUE expresion_numerica:b{:RESULT=new Operacion(a,b, Operacion.Tipo_operacion.NO_IGUAL_QUE);:}
 ;
