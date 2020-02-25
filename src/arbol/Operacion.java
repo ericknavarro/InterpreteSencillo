@@ -27,6 +27,8 @@ public class Operacion implements Instruccion{
         CADENA,
         MAYOR_QUE,
         MENOR_QUE,
+        IGUAL_QUE,
+        NO_IGUAL_QUE,
         CONCATENACION
     }
     /**
@@ -42,7 +44,7 @@ public class Operacion implements Instruccion{
      */
     private Operacion operadorDer;
     /**
-     * Valor específico si se tratara de una literal, es decir un número o una 
+     * Valor específico si se tratara de una literal, es decir un número o una
      * cadena.
      */
     private Object valor;
@@ -70,7 +72,7 @@ public class Operacion implements Instruccion{
         this.operadorIzq = operadorIzq;
     }
     /**
-     * Constructor para operaciones unarias (un operador), cuyo operador es 
+     * Constructor para operaciones unarias (un operador), cuyo operador es
      * específicamente una cadena, estas operaciones son:
      * IDENTIFICADOR, CADENA
      * @param a Cadena que representa la operación a realizar
@@ -81,7 +83,7 @@ public class Operacion implements Instruccion{
         this.tipo = tipo;
     }
     /**
-     * Constructor para operaciones unarias (un operador), cuyo operador es 
+     * Constructor para operaciones unarias (un operador), cuyo operador es
      * específicamente una NUMERO, estas operaciones son:
      * NUMERO_ENTERO, NUMERO_DECIMAL
      * @param a Valor de tipo Double que representa la operación a realizar.
@@ -92,7 +94,7 @@ public class Operacion implements Instruccion{
     }
         
     /**
-     * Método que ejecuta la instrucción operación, es una sobreescritura del 
+     * Método que ejecuta la instrucción operación, es una sobreescritura del
      * método ejecutar que se debe programar por la implementación de la interfaz
      * instrucción
      * @param ts tabla de símbolos del ámbito padre de la sentencia
@@ -120,6 +122,10 @@ public class Operacion implements Instruccion{
             return ((Double)operadorIzq.ejecutar(ts)).doubleValue()>((Double)operadorDer.ejecutar(ts)).doubleValue();
         }else if(tipo== Tipo_operacion.MENOR_QUE){
             return ((Double)operadorIzq.ejecutar(ts)).doubleValue()<((Double)operadorDer.ejecutar(ts)).doubleValue();
+        }else if(tipo== Tipo_operacion.IGUAL_QUE){
+            return ((Double)operadorIzq.ejecutar(ts)).equals((Double)operadorDer.ejecutar(ts));
+        }else if(tipo== Tipo_operacion.NO_IGUAL_QUE){
+            return !((Double)operadorIzq.ejecutar(ts)).equals((Double)operadorDer.ejecutar(ts));
         }else if(tipo== Tipo_operacion.CONCATENACION){
             return operadorIzq.ejecutar(ts).toString()+operadorDer.ejecutar(ts).toString();
         }else{
