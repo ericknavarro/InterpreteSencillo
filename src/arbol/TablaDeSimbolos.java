@@ -28,16 +28,19 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
      * @return Valor de la variable que se buscaba, si no existe se devuelve nulo
      */
     Object getValor(String id) {
-        for(Simbolo s:this){
-            if(s.getId().equals(id)){
-                return s.getValor();
+        if (contains(id))
+        {
+            for(Simbolo s:this){
+                if(s.getId().equals(id)){
+                    return s.getValor();
+                }
             }
         }
         System.out.println("La variable "+id+" no existe en este ámbito.");
-        return "Desconocido";
+        return null;
     }
     /**
-     * Método que asigna un valor a una variable específica, si no la encuentra 
+     * Método que asigna un valor a una variable específica, si no la encuentra
      * no realiza la asignación y despliega un mensaje de error.
      * @param id Identificador de la variable que quiere buscarse
      * @param valor Valor que quiere asignársele a la variable buscada
@@ -51,5 +54,25 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
         }
         System.out.println("La variable "+id+" no existe en este ámbito, por lo "
                 + "que no puede asignársele un valor.");
+    }
+
+    @Override
+    public boolean add(Simbolo e) {
+        if (!contains(e.getId())) {
+            super.add(e);
+            return true;
+        }
+        System.out.println("La variable "+e.getId()+" no puede declararse porque ya existe en este ámbito");
+        return false;
+    }
+
+    public boolean contains(String id)
+    {
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 }
